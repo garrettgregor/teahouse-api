@@ -21,13 +21,8 @@ Style/StringLiterals:
 Style/Documentation:
   Enabled: false
 
-Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context', 'it']
-
-Naming/VariableNumber:
-  IgnoredMethods: ['describe', 'context', 'it']
-
 AllCops:
+  NewCops: enable
   Exclude:
     - 'db/seeds.rb'
     - 'db/schema.rb'
