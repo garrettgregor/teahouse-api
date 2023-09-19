@@ -10,6 +10,9 @@
 # See https://docs.rubocop.org/rubocop/configuration
 
 require: rubocop-rails
+require: rubocop-rspec
+require: rubocop-capybara
+require: rubocop-factory_bot
 
 Naming/VariableNumber:
   Enabled: false
