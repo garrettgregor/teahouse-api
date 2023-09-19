@@ -11,6 +11,9 @@
 
 require: rubocop-rails
 
+Naming/VariableNumber:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
