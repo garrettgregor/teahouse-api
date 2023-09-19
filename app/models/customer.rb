@@ -4,8 +4,8 @@ class Customer < ApplicationRecord
   validates :email, presence: true
   validates :address, presence: true
 
-  has_many :customer_subscriptions
-  has_many :subscriptions, through: :customer_subscriptions
-  has_many :subscription_teas, through: :subscriptions
-  has_many :teas, through: :subscription_teas
+  has_many :customer_subscriptions, dependent: :destroy
+  has_many :subscriptions, through: :customer_subscriptions, dependent: :destroy
+  has_many :subscription_teas, through: :subscriptions, dependent: :destroy
+  has_many :teas, through: :subscription_teas, dependent: :destroy
 end
