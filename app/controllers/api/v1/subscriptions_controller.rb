@@ -12,6 +12,7 @@ module Api
       end
 
       private
+
       def subscription_params
         params.require(:subscription).permit(:status, :title, :price, :tea_id, :frequency)
       end
