@@ -15,6 +15,15 @@ require:
   - rubocop-capybara
   - rubocop-factory_bot
 
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
 Naming/VariableNumber:
   Enabled: false
 
