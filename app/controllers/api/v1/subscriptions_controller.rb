@@ -1,20 +1,19 @@
 module Api
   module V1
     class SubscriptionsController < ApplicationController
-      before_action :get_subscription
-
-      def update
-        @subscription.update(subscription_params)
-        render json: SubscriptionSerializer.new(@subscription), status: :ok
+      def create
+        customer = Customer.find(params[:customer_id])
+        subscription = customer.subscriptions.new(subscription_params)
+        if subscription.save
+          render json: SubscriptionSerializer.new(subscription), status: :ok
+        else
+          render json: { error: "Cannot create this subscription" }, status: :not_acceptable
+        end
       end
 
       private
-      def get_subscription
-        @subscription = Subscription.find(params[:id])
-      end
-
       def subscription_params
-        params.permit(:status)
+        params.require(:subscription).permit(:status, :title, :price, :tea_id, :frequency)
       end
     end
   end
