@@ -5,6 +5,7 @@ class Subscription < ApplicationRecord
   validates :frequency, presence: true, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   enum :status, %i[inactive active]
+  enum :frequency, %i[daily weekly monthly yearly]
 
   belongs_to :customer
   belongs_to :tea
