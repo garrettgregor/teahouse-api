@@ -28,7 +28,7 @@ RSpec.describe "Subscription Post Request" do
     it "establishes an endpoint to update a customer's subcription" do
       post api_v1_customer_subscriptions_path(customer_1), params: valid_post_info.to_json, headers: valid_headers
 
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 
@@ -49,7 +49,7 @@ RSpec.describe "Subscription Post Request" do
     it "returns an error message when subscription wasn't created" do
       post api_v1_customer_subscriptions_path(customer_1), params: invalid_post_info.to_json, headers: valid_headers
 
-      expect(response.status).to eq(406)
+      expect(response).to have_http_status(:not_acceptable)
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 
