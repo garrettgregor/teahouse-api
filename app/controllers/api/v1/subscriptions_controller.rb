@@ -13,11 +13,8 @@ module Api
 
       def update
         subscription = Subscription.find(params[:id])
-        if subscription.update(subscription_params)
-          render json: SubscriptionSerializer.new(subscription), status: :ok
-        else
-          render json: { error: "Cannot update this subscription" }, status: :not_acceptable
-        end
+        subscription.update(subscription_params)
+        render json: SubscriptionSerializer.new(subscription), status: :ok
       end
 
       private

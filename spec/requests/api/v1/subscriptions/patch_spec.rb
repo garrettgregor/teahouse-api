@@ -44,7 +44,7 @@ RSpec.describe "Subscription Post Request" do
   end
 
   context "sad path" do
-    xit "returns an error message when subscription wasn't created" do
+    it "returns an error message when subscription wasn't created" do
       patch api_v1_customer_subscription_path(customer_1, subscription), params: invalid_patch_info.to_json, headers: valid_headers
 
       expect(response).to have_http_status(:not_acceptable)
