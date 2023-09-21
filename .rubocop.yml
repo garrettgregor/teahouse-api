@@ -15,6 +15,15 @@ require:
   - rubocop-capybara
   - rubocop-factory_bot
 
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 RSpec/ContextWording:
   Enabled: false
 
