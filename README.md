@@ -329,6 +329,21 @@ PATCH /api/v1/customers/:customer_id/subscriptions/:subscription_id
     }
 }
 ```
+Status and frequency are updated with integers and are linked in the following format:
+##### Status
+
+```
+0 => "inactive"
+1 => "active"
+```
+##### Frequency
+
+```
+0 => "daily"
+1 => "weekly"
+2 => "monthly"
+3 => "yearly"
+```
 
 #### Example Response
 
