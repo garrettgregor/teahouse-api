@@ -7,7 +7,8 @@ module Api
         if subscription.save
           render json: SubscriptionSerializer.new(subscription), status: :ok
         else
-          render json: ErrorSerializer.invalid_subscription_post(subscription.errors.full_messages), status: :not_acceptable
+          render json: ErrorSerializer.invalid_subscription_post(subscription.errors.full_messages),
+                 status: :not_acceptable
         end
       end
 
