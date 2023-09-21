@@ -4,27 +4,21 @@ RSpec.describe "Subscription Post Request" do
   let!(:customer_1) { create(:customer) }
   let!(:teas) { create_list(:tea, 2) }
   let!(:subscription) { create(:subscription, customer_id: customer_1.id, tea_id: teas[0].id, status: 0) }
-  let!(:valid_patch_info) do
-    {
-      subscription:
-        {
-          status: 1
-        }
-    }
-  end
-  let!(:invalid_patch_info) do
-    {
-      subscription:
-        {
-          status: 2
-        }
-    }
-  end
   let(:valid_headers) { { "CONTENT_TYPE" => "application/json" } }
 
   context "happy path" do
+    let!(:valid_patch_info) do
+      {
+        subscription:
+          {
+            status: 1
+          }
+      }
+    end
+
     it "cancels a customer's subcription" do
-      patch api_v1_customer_subscription_path(customer_1, subscription), params: valid_patch_info.to_json, headers: valid_headers
+      patch api_v1_customer_subscription_path(customer_1, subscription), params: valid_patch_info.to_json,
+                                                                         headers: valid_headers
 
       expect(response).to have_http_status(:ok)
 
@@ -44,8 +38,18 @@ RSpec.describe "Subscription Post Request" do
   end
 
   context "sad path" do
+    let!(:invalid_patch_info) do
+      {
+        subscription:
+          {
+            status: 2
+          }
+      }
+    end
+
     it "returns an error message when subscription wasn't created" do
-      patch api_v1_customer_subscription_path(customer_1, subscription), params: invalid_patch_info.to_json, headers: valid_headers
+      patch api_v1_customer_subscription_path(customer_1, subscription), params: invalid_patch_info.to_json,
+                                                                         headers: valid_headers
 
       expect(response).to have_http_status(:not_acceptable)
 

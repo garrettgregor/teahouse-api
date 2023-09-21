@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "Customer Get Request" do
   let!(:customer_1) { create(:customer) }
-  let!(:teas) { create_list(:tea, 2) }
-  let!(:subscription_1) { create(:subscription, customer: customer_1, tea: teas[0], status: 0) }
-  let!(:subscription_2) { create(:subscription, customer: customer_1, tea: teas[1], status: 1) }
+  let!(:tea_1) { create(:tea) }
+  let!(:tea_2) { create(:tea) }
+  let!(:subscription_1) { create(:subscription, customer: customer_1, tea: tea_1, status: 0) }
+  let!(:subscription_2) { create(:subscription, customer: customer_1, tea: tea_2, status: 1) }
   let(:valid_headers) { { "CONTENT_TYPE" => "application/json" } }
 
   context "happy path" do
@@ -28,7 +29,7 @@ RSpec.describe "Customer Get Request" do
       expect(parsed[:data][:subscriptions].first[:title]).to eq(subscription_1.title)
       expect(parsed[:data][:subscriptions].first[:status]).to eq(subscription_1.status)
       expect(parsed[:data][:subscriptions].first[:price]).to eq(subscription_1.price)
-      expect(parsed[:data][:subscriptions].first[:tea_id]).to eq(teas[0].id)
+      expect(parsed[:data][:subscriptions].first[:tea_id]).to eq(tea_1.id)
     end
   end
 
@@ -39,7 +40,7 @@ RSpec.describe "Customer Get Request" do
       expect(response).to have_http_status(:not_found)
 
       parsed = JSON.parse(response.body, symbolize_names: true)
-      
+
       expect(parsed).to be_a(Hash)
       expect(parsed).to have_key(:errors)
       expect(parsed[:errors]).to be_an(Array)

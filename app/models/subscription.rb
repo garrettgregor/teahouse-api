@@ -13,7 +13,7 @@ class Subscription < ApplicationRecord
   belongs_to :tea
 
   ## Attempt to fix errors with strong params update
-  
+
   # validate do
   #   if @not_valid_status
   #     errors.add(:status, "Not valid course type, please select from the list: #{COURSE_TYPES}")
