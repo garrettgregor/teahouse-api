@@ -255,7 +255,7 @@ POST /api/v1/customers/:id/subscriptions
 }
 ```
 
-#### Example Response
+#### Example Successful Response
 
 ```json
 {
@@ -286,15 +286,34 @@ POST /api/v1/customers/:id/subscriptions
 }
 ```
 
-##### Error Response
+#### Error Response
 
 | Code | Description |
 | :--- | :---------- |
 | 406  | `NOT ACCEPTABLE` |
 
+##### Request Body
+
 ```json
 {
-  "error": "Cannot create this subscription"
+  "tea_id": 1,
+  "title": "Student Subscription",
+  "price": 5.99,
+  "status": 1,
+  "frequency": 0
+}
+```
+
+##### Example Error Response
+
+```json
+{
+    "errors": [
+        {
+            "status": "406",
+            "title": "Title can't be blank"
+        }
+    ]
 }
 ```
 
@@ -325,25 +344,22 @@ PATCH /api/v1/customers/:customer_id/subscriptions/:subscription_id
 {
   "subscription":
     {
-      "status": 0
+      "status": "inactive"
     }
 }
 ```
-Status and frequency are updated with integers and are linked in the following format:
+Status and frequency are updated with the available options:
 ##### Status
 
-```
-0 => "inactive"
-1 => "active"
-```
+- "inactive"
+- "status"
+
 ##### Frequency
 
-```
-0 => "daily"
-1 => "weekly"
-2 => "monthly"
-3 => "yearly"
-```
+- "daily"
+- "weekly"
+- "monthly"
+- "yearly"
 
 #### Example Response
 
@@ -384,12 +400,16 @@ Error Response:
 
 ```json
 {
-  "error": "Cannot update this subscription"
+    "errors": [
+        {
+            "status": "406",
+            "title": "'-1' is not a valid status"
+        }
+    ]
 }
 ```
 
 </details>
-
 </details>
 </details>
 </details>

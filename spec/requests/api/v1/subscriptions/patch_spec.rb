@@ -11,7 +11,7 @@ RSpec.describe "Subscription Post Request" do
       {
         subscription:
           {
-            status: 1
+            status: "active"
           }
       }
     end
@@ -42,7 +42,7 @@ RSpec.describe "Subscription Post Request" do
       {
         subscription:
           {
-            status: 2
+            status: "activated"
           }
       }
     end
@@ -56,8 +56,8 @@ RSpec.describe "Subscription Post Request" do
       parsed = JSON.parse(response.body, symbolize_names: true)
 
       expect(parsed).to be_a(Hash)
-      expect(parsed).to have_key(:error)
-      expect(parsed[:error]).to eq("Cannot update this subscription")
+      expect(parsed).to have_key(:errors)
+      expect(parsed[:errors].first[:title]).to eq("'activated' is not a valid status")
     end
   end
 end

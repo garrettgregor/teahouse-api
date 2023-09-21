@@ -54,8 +54,8 @@ RSpec.describe "Subscription Post Request" do
       parsed = JSON.parse(response.body, symbolize_names: true)
 
       expect(parsed).to be_a(Hash)
-      expect(parsed).to have_key(:error)
-      expect(parsed[:error]).to eq("Cannot create this subscription")
+      expect(parsed).to have_key(:errors)
+      expect(parsed[:errors].first[:title]).to eq("Tea must exist")
     end
   end
 end
